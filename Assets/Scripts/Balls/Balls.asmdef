@@ -1,0 +1,17 @@
+{
+    "name": "Balls",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7273568a0947e1b44b5baf7cd0c1e065",
+        "GUID:88306880be7790f469fdf954ab645ea6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
