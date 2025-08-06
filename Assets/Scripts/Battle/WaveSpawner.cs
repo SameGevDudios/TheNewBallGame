@@ -21,13 +21,14 @@ public class WaveSpawner : IWaveSpawner
     public Queue<Battling> Spawn(IBattle sender)
     {
         Queue<Battling> enemies = new();
-        foreach(Wave.Enemy enemy in _waves[_currentWave].Enemies) 
+        int waveIndex = _currentWave % (_waves.Count - 1);
+        foreach (Wave.Enemy enemy in _waves[waveIndex].Enemies) 
         {
             GameObject buffer = _poolManager.InstantiateFromPool(enemy.EnemyObject.name, enemy.Position, Quaternion.identity);
             enemies.Enqueue(buffer.GetComponent<Battling>());
         }
         InitEnemies(sender, enemies);
-        _currentWave = Mathf.Min(_currentWave + 1, _waves.Count - 1);
+        _currentWave++;
         return enemies;
     }
 
