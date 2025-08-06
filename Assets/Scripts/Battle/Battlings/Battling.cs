@@ -19,6 +19,7 @@ public abstract class Battling : MonoBehaviour
 
     public virtual void Attack(Battling target)
     {
+        _target = target;
         Invoke("ApplyDamage", _applyDamageTime);
         Invoke("FinishAttack", _attackTime);
     }
