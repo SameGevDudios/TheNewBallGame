@@ -11,10 +11,10 @@ public class BackgroundSpawner : IBackgroundSpawner
     {
         _poolManager = poolManager;
         _spawnOffset = spawnOffset;
-        SpawnNewBackground();
+        Spawn();
     }
 
-    public void SpawnNewBackground()
+    public void Spawn()
     {
         _poolManager.InstantiateFromPool("background", _spawnPosition, Quaternion.identity);
         _spawnPosition += Vector3.right * _spawnOffset;

@@ -1,4 +1,4 @@
 public interface IBackgroundSpawner
 {
-    void SpawnNewBackground();
+    void Spawn();
 }
