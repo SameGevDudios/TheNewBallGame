@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Battling : MonoBehaviour
 {
-    private IBattle _battle;
+    protected IBattle _battle;
     private Battling _target;
 
     private int _health, _damage;

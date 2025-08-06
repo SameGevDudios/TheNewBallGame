@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class MeleeEnemy : Battling
 {
-
+    protected override void Death()
+    {
+        base.Death();
+        _battle.EnemyKilled();
+    }
 }
