@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class BackgroundSpawner : IBackgroundSpawner
 {
-    private PoolManager _poolManager;
+    private IPoolManager _poolManager;
     private GameObject _currentBackground;
     private Vector3 _spawnPosition;
     private float _spawnOffset;
 
-    public BackgroundSpawner(PoolManager poolManager, float spawnOffset)
+    public BackgroundSpawner(IPoolManager poolManager, float spawnOffset)
     {
         _poolManager = poolManager;
         _spawnOffset = spawnOffset;
