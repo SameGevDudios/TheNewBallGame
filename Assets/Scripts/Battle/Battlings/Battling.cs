@@ -8,7 +8,7 @@ public abstract class Battling : MonoBehaviour
     private int _health, _damage;
     private float _applyDamageTime, _attackTime;
 
-    public void Instantiate(IBattle battle, int health, int damage, float applyDamageTime, float attackTime)
+    public void Init(IBattle battle, int health, int damage, float applyDamageTime, float attackTime)
     {
         _battle = battle;
         _health = health;
