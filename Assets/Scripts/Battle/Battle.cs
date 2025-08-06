@@ -37,6 +37,11 @@ public class Battle : IBattle
         _enemies.Enqueue(_currentEntity);
     }
 
+    public void PlayerKilled()
+    {
+
+    }
+
     public void EnemyKilled()
     {
         _enemies.Dequeue();
