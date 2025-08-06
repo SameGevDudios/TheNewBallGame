@@ -52,10 +52,16 @@ public class Battle : IBattle
         _enemies.Dequeue();
         if(_enemies.Count == 0)
         {
-            SpawnNewWave();
-            SetPlayerTurn();
-            // HealPlayer();
+            NextWave();
         }
+    }
+
+    private void NextWave()
+    {
+
+        SpawnNewWave();
+        SetPlayerTurn();
+        // HealPlayer();
     }
 
     private void SpawnNewWave()
