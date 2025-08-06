@@ -1,4 +1,6 @@
+using System.Collections.Generic;
+
 public interface IWaveSpawner
 {
-    void Spawn(out int enemyCount);
+    Queue<Battling> Spawn();
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 public abstract class Battling : MonoBehaviour
 {
     private IBattle _battle;
+    private Battling _target;
+
     private int _health, _damage;
     private float _applyDamageTime, _attackTime;
 
@@ -15,16 +17,15 @@ public abstract class Battling : MonoBehaviour
         _attackTime = attackTime;
     }
 
-    public virtual void Attack()
+    public virtual void Attack(Battling target)
     {
-        print("I attacked!");
         Invoke("ApplyDamage", _applyDamageTime);
         Invoke("FinishAttack", _attackTime);
     }
 
     public void ApplyDamage()
     {
-        _battle.ApplyDamage(_damage);
+        _target.GetDamage(_damage);
     }
 
     public void GetDamage(int damage)

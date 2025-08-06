@@ -13,13 +13,15 @@ public class WaveSpawner : IWaveSpawner
         _waves = waves;
     }
 
-    public void Spawn(out int enemyCount)
+    public Queue<Battling> Spawn()
     {
-        enemyCount = _waves[_currentWave].Enemies.Count;
+        Queue<Battling> enemies = new();
         foreach(Wave.Enemy enemy in _waves[_currentWave].Enemies) 
         {
-            _poolManager.InstantiateFromPool(enemy.EnemyObject.name, enemy.Position, Quaternion.identity);
+            GameObject buffer = _poolManager.InstantiateFromPool(enemy.EnemyObject.name, enemy.Position, Quaternion.identity);
+            enemies.Enqueue(buffer.GetComponent<Battling>());
         }
         _currentWave = Mathf.Min(_currentWave + 1, _waves.Count - 1);
+        return enemies;
     }
 }
