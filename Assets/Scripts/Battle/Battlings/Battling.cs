@@ -42,6 +42,7 @@ public abstract class Battling : MonoBehaviour
     protected virtual void Death()
     {
         print("I died!");
+        gameObject.SetActive(false);
     }
 
     private void FinishAttack()
