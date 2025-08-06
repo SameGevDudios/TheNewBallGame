@@ -1,0 +1,16 @@
+{
+    "name": "BackgroundAnimation",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7273568a0947e1b44b5baf7cd0c1e065"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
