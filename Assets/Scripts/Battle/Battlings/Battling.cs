@@ -22,6 +22,7 @@ public abstract class Battling : MonoBehaviour
         _target = target;
         Invoke("ApplyDamage", _applyDamageTime);
         Invoke("FinishAttack", _attackTime);
+        Debug.Log($"{gameObject.name} attacked {_target}!");
     }
 
     public void ApplyDamage()
@@ -33,7 +34,7 @@ public abstract class Battling : MonoBehaviour
     {
         _health -= damage;
         // UpdateUI
-        if(_health < 0 )
+        if(_health < 0)
         {
             Death();
         }
@@ -41,7 +42,7 @@ public abstract class Battling : MonoBehaviour
 
     protected virtual void Death()
     {
-        print("I died!");
+        Debug.Log($"{gameObject.name} died!");
         gameObject.SetActive(false);
     }
 
