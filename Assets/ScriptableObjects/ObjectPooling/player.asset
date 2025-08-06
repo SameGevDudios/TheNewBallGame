@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1992907fef3ea54448185307e57cb8d8, type: 3}
   m_Name: player
   m_EditorClassIdentifier: 
-  Object: {fileID: 0}
+  Object: {fileID: 7755553184418429724, guid: efcc7674fbb5aff4482eb81d2475d3ec, type: 3}
   Size: 1
