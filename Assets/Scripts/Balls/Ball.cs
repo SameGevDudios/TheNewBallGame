@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class Ball : MonoBehaviour, IBall
 {
     private BallSpawner _spawner;
     private Rigidbody2D _rigidbody;

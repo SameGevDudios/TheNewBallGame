@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager
+public class PoolManager : IPoolManager
 {
     private Dictionary<string, Queue<GameObject>> _poolDictionary = new();
     private List<Pool> _pools;

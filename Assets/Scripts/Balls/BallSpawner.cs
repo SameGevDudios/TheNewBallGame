@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BallSpawner
 {
-    private PoolManager _poolManager;
-    public BallSpawner(PoolManager poolManager)
+    private IPoolManager _poolManager;
+    public BallSpawner(IPoolManager poolManager)
     {
         _poolManager = poolManager;
     }
@@ -17,7 +17,7 @@ public class BallSpawner
     public GameObject SpawnBallAtPosition(Vector3 position)
     {
         GameObject buffer = _poolManager.InstantiateFromPool("ball", position, Quaternion.identity);
-        Ball ball = buffer.GetComponent<Ball>();
+        IBall ball = buffer.GetComponent<IBall>();
         ball.Instantiate(this);
         return buffer;
     }
