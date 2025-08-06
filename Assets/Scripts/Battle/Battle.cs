@@ -26,6 +26,7 @@ public class Battle : IBattle
         else
         {
             _currentEntity.Attack(_player);
+            _currentEntity = _player;
             _playerTurn = true;
         }
     }
