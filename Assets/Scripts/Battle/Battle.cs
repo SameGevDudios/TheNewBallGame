@@ -5,14 +5,20 @@ public class Battle : IBattle
     private IWaveSpawner _waveSpawner;
     private Battling _player, _currentEntity;
     private Queue<Battling> _enemies;
-    private bool _playerTurn = true;
+    private bool _playerTurn;
 
     public Battle(IWaveSpawner waveSpawner, Battling player)
     {
         _waveSpawner = waveSpawner;
         _player = player;
-        _currentEntity = _player;
+        SetPlayerTurn();
         SpawnNewWave();
+    }
+
+    private void SetPlayerTurn()
+    {
+        _currentEntity = _player;
+        _playerTurn = true;
     }
 
     public void Attack()
@@ -26,8 +32,7 @@ public class Battle : IBattle
         else
         {
             _currentEntity.Attack(_player);
-            _currentEntity = _player;
-            _playerTurn = true;
+            SetPlayerTurn();
         }
     }
     
@@ -48,6 +53,8 @@ public class Battle : IBattle
         if(_enemies.Count == 0)
         {
             SpawnNewWave();
+            SetPlayerTurn();
+            // HealPlayer();
         }
     }
 
