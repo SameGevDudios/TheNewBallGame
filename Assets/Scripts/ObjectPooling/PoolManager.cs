@@ -14,7 +14,10 @@ public class PoolManager
         foreach (Pool pool in pools)
         {
             _poolDictionary.Add(pool.name, new Queue<GameObject>());
-            InstantiateNewObject(pool.name);
+            for(int i = 0; i < pool.Size; i++)
+            {
+                InstantiateNewObject(pool.name);
+            }
         }
     }
     
