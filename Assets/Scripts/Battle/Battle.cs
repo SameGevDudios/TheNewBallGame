@@ -39,6 +39,7 @@ public class Battle : IBattle
 
     public void EnemyKilled()
     {
+        _enemies.Dequeue();
         if(_enemies.Count == 0)
         {
             SpawnNewWave();
