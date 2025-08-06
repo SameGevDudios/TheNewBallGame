@@ -34,7 +34,7 @@ public abstract class Battling : MonoBehaviour
     {
         _health -= damage;
         // UpdateUI
-        if(_health < 0)
+        if(_health <= 0)
         {
             Death();
         }
