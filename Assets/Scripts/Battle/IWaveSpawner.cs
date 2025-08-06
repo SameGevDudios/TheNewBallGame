@@ -2,5 +2,5 @@ using System.Collections.Generic;
 
 public interface IWaveSpawner
 {
-    Queue<Battling> Spawn();
+    Queue<Battling> Spawn(IBattle sender);
 }

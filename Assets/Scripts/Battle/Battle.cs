@@ -46,6 +46,6 @@ public class Battle : IBattle
 
     private void SpawnNewWave()
     {
-        _enemies = _waveSpawner.Spawn();
+        _enemies = _waveSpawner.Spawn(this);
     }
 }
