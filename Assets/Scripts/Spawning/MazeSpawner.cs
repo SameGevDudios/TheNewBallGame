@@ -18,7 +18,7 @@ public class MazeSpawner : ISpawner
     public GameObject Spawn()
     {
         GameObject buffer = _poolManager
-            .InstantiateFromPool($"maze{_currentMaze}", _player.position + Vector3.up * _spawnOffsetY, Quaternion.identity);
+            .InstantiateFromPool($"maze{_currentMaze}", _player.position + Vector3.down * _spawnOffsetY, Quaternion.identity);
         NextMaze();
         return buffer;
     }
