@@ -17,4 +17,9 @@ public class PlayerMover : IMover
     {
         _player.DOMoveX(_player.position.x + _moveDistance, _moveDuration);
     }
+
+    public void SetNewMovable(Transform newMovable)
+    {
+        _player = newMovable;
+    }
 }
