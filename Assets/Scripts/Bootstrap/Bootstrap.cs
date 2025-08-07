@@ -23,7 +23,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private int _enemyHealth, _enemyDamage;
 
     [Header("Battle speed")]
-    [SerializeField] private float _applyDamageSpeed;
+    [SerializeField, Min(0.01f)] private float _applyDamageSpeed;
     [SerializeField] private float _attackSpeed;
 
     [Header("Upgrades")]

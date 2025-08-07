@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public abstract class Battling : MonoBehaviour
 {
     [SerializeField] private Image _healthBar;
+    [SerializeField] private Weapon _weapon;
     private HealthBarUI _healthBarUI;
     protected IBattle _battle;
     private Battling _target;
@@ -25,6 +26,8 @@ public abstract class Battling : MonoBehaviour
     public virtual void Attack(Battling target)
     {
         _target = target;
+        _weapon.LookAtTarget(_target.transform);
+        _weapon.Attack(_applyDamageTime);
         Invoke("ApplyDamage", _applyDamageTime);
         Invoke("FinishAttack", _attackTime);
     }
