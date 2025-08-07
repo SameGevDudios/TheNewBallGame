@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveSpawner : IWaveSpawner
+public class WaveSpawner : ISpawner
 {
     private IPoolManager _poolManager;
     private IWaveMessenger _messenger;

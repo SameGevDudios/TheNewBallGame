@@ -35,11 +35,11 @@ public class Bootstrap : MonoBehaviour
 
         // Instantiave wave messenger
         IWaveMessenger messenger = new WaveMessenger();
-        
+
         // Instantiate spawners
-        IWaveSpawner waveSpawner = 
+        ISpawner waveSpawner = 
             new WaveSpawner(poolManager, messenger, _waves, _enemyHealth, _enemyDamage, _applyDamageSpeed, _attackSpeed, _moveDistance);
-        IBackgroundSpawner backgroundSpawner = new BackgroundSpawner(poolManager, _moveDistance);
+        ISpawner backgroundSpawner = new BackgroundSpawner(poolManager, _moveDistance);
         
         // Instantiate player
         Battling player = poolManager.InstantiateFromPool(_playerPoolTag, _playerPosition, Quaternion.identity)

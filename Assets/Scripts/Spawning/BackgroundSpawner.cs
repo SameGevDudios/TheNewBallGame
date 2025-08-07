@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BackgroundSpawner : IBackgroundSpawner
+public class BackgroundSpawner : ISpawner
 {
     private IPoolManager _poolManager;
     private GameObject _currentBackground;

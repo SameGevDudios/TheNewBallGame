@@ -1,11 +1,10 @@
 public class LevelChanger : IGameEvent
 {
     private IMover _playerMover;
-    private IWaveSpawner _waveSpawner;
-    private IBackgroundSpawner _backgroundSpawner;
+    private ISpawner _waveSpawner, _backgroundSpawner;
     private IEventCaller _eventCaller;
 
-    public LevelChanger(IMover playerMover, IBackgroundSpawner backgroundSpawner, IWaveSpawner waveSpawner, IEventCaller eventCaller)
+    public LevelChanger(IMover playerMover, ISpawner backgroundSpawner, ISpawner waveSpawner, IEventCaller eventCaller)
     {
         _playerMover = playerMover;
         _backgroundSpawner = backgroundSpawner;

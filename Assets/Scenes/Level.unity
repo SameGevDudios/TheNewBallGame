@@ -168,7 +168,7 @@ MonoBehaviour:
   _enemyHealth: 40
   _enemyDamage: 10
   _applyDamageSpeed: 0
-  _attackSpeed: 1
+  _attackSpeed: 3
   _moveDistance: 8
   _moveDuration: 2
 --- !u!4 &2066783155
