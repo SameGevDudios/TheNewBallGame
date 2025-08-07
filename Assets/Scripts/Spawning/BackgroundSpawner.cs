@@ -13,9 +13,10 @@ public class BackgroundSpawner : ISpawner
         Spawn();
     }
 
-    public void Spawn()
+    public GameObject Spawn()
     {
-        _poolManager.InstantiateFromPool("background", _spawnPosition, Quaternion.identity);
+        GameObject buffer = _poolManager.InstantiateFromPool("background", _spawnPosition, Quaternion.identity);
         _spawnPosition += Vector3.right * _spawnOffset;
+        return buffer;
     }
 }

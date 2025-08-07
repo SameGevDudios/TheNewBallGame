@@ -23,7 +23,7 @@ public class WaveSpawner : ISpawner
         _spawnOffset = spawnOffset;
     }
 
-    public void Spawn()
+    public GameObject Spawn()
     {
         Queue<Battling> enemies = new();
         int waveIndex = _currentWave % (_waves.Count - 1);
@@ -37,6 +37,7 @@ public class WaveSpawner : ISpawner
         InitEnemies(_messenger.GetBattle(), enemies);
         _currentWave++;
         _messenger.SendMessage(enemies);
+        return null;
     }
 
     public void InitEnemies(IBattle battle, Queue<Battling> enemies)
