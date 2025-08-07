@@ -283,10 +283,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pools:
+  - {fileID: 11400000, guid: e531d73ee9f302c42af6ba8ec3aa91c0, type: 2}
   - {fileID: 11400000, guid: 22898985ef251f1459b22bc905b0a50d, type: 2}
   - {fileID: 11400000, guid: a09b4008bd483444eabe0e1d113b619b, type: 2}
   - {fileID: 11400000, guid: f0c8efd7779a9ff48b119aec8214aa23, type: 2}
   - {fileID: 11400000, guid: c857fb082b00e214bb0e7499c3988a7b, type: 2}
+  - {fileID: 11400000, guid: c9c9300981b470842ada09dad6b832af, type: 2}
+  - {fileID: 11400000, guid: 1b21b38ed86d3d5429a97b7d482a12be, type: 2}
+  - {fileID: 11400000, guid: e38532b9a24b73a4292ee658f9bbd3c8, type: 2}
   _waves:
   - {fileID: 11400000, guid: 9cd47af899dcd104fb0310cf444ff984, type: 2}
   - {fileID: 11400000, guid: 28bd7a83575df06478179fb1d7c81408, type: 2}
@@ -299,16 +303,19 @@ MonoBehaviour:
   _enemyHealth: 40
   _enemyDamage: 10
   _applyDamageSpeed: 0
-  _attackSpeed: 3
+  _attackSpeed: 1
   _playerMoveDistance: 8
   _playerMoveDuration: 2
   _mazePrefabCount: 3
   _cameraMoveDistance: -2.54
   _mazeMoveDistance: 10
   _mazeEventMoveDuration: 2
-  _mazeSpawnDelay: 0
-  _beforeEventDelay: 3
-  _afterEventDelay: 3
+  _ballPoolTag: ball
+  _ballEventPoolTag: ballEvent
+  _ballSpawnDelay: 0.5
+  _ballSpawnPositionY: -1
+  _beforeEventDelay: 1
+  _afterEventDelay: 2
 --- !u!4 &2066783155
 Transform:
   m_ObjectHideFlags: 0

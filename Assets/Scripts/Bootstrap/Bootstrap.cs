@@ -31,6 +31,11 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private float _mazeMoveDistance;
     [SerializeField] private float _mazeEventMoveDuration;
 
+    [Header("Ball event")]
+    [SerializeField] private string _ballPoolTag;
+    [SerializeField] private string _ballEventPoolTag;
+    [SerializeField] private float _ballSpawnDelay, _ballSpawnPositionY;
+
     [Header("Event delay")]
     [SerializeField] private float _beforeEventDelay;
     [SerializeField] private float _afterEventDelay;
@@ -51,11 +56,13 @@ public class Bootstrap : MonoBehaviour
             .GetComponent<Player>();
         Transform camera = ((Player)player).GetCamera();
 
+
         // Instantiate spawners
         ISpawner waveSpawner = 
             new WaveSpawner(poolManager, messenger, _waves, _enemyHealth, _enemyDamage, _applyDamageSpeed, _attackSpeed, _playerMoveDistance);
         ISpawner backgroundSpawner = new BackgroundSpawner(poolManager, _playerMoveDistance);
         ISpawner mazeSpawner = new MazeSpawner(poolManager, camera.transform, _mazeMoveDistance, _mazePrefabCount);
+        ISpawner ballSpawner = new BallSpawner(poolManager, _ballPoolTag);
 
         // Instantiate movers
         IMover playerMover = new PlayerMover(player.transform, _playerMoveDistance, _playerMoveDuration);
@@ -69,11 +76,14 @@ public class Bootstrap : MonoBehaviour
         IGameEvent changer = new LevelChangeEvent(playerMover, backgroundSpawner, waveSpawner, eventCaller);
         IGameEvent battleEvent = (IGameEvent)battle;
         IGameEvent mazeEvent = new MazeEvent(mazeSpawner, cameraMover, mazeMover, eventCaller);
+        BallEvent ballEvent = poolManager.InstantiateFromPool(_ballEventPoolTag, Vector3.zero, Quaternion.identity).GetComponent<BallEvent>();
+        ballEvent.Init(ballSpawner, eventCaller, mazeEvent, _ballSpawnDelay, _ballSpawnPositionY);
 
         // Add events to queue
         eventCaller.Add(changer);
         eventCaller.Add(battleEvent);
         eventCaller.Add(mazeEvent);
+        eventCaller.Add(ballEvent);
 
         // Start game
         messenger.SetBattle(battle);

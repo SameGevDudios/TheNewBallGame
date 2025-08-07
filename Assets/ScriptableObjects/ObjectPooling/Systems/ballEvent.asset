@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1992907fef3ea54448185307e57cb8d8, type: 3}
-  m_Name: ball
+  m_Name: ballEvent
   m_EditorClassIdentifier: 
-  Object: {fileID: 4117983205293774526, guid: d0415783291f0a54090bdb6910a56dc6, type: 3}
-  Size: 30
+  Object: {fileID: 4434705424950590342, guid: cc9ea6280639d604b8299ed2b2d3da80, type: 3}
+  Size: 1
