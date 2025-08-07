@@ -55,7 +55,7 @@ public class Bootstrap : MonoBehaviour
         ISpawner waveSpawner = 
             new WaveSpawner(poolManager, messenger, _waves, _enemyHealth, _enemyDamage, _applyDamageSpeed, _attackSpeed, _playerMoveDistance);
         ISpawner backgroundSpawner = new BackgroundSpawner(poolManager, _playerMoveDistance);
-        ISpawner mazeSpawner = new MazeSpawner(poolManager, player.transform, _mazeMoveDistance, _mazePrefabCount);
+        ISpawner mazeSpawner = new MazeSpawner(poolManager, camera.transform, _mazeMoveDistance, _mazePrefabCount);
         
 
         // Instantiate movers
