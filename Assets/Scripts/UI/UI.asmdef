@@ -1,14 +1,9 @@
 {
-    "name": "BattleDefinition",
+    "name": "UI",
     "rootNamespace": "",
     "references": [
         "GUID:4229ebeff00d7114c97a7da3e59b9ae4",
-        "GUID:7273568a0947e1b44b5baf7cd0c1e065",
-        "GUID:068029dd4d07a344d9a34984ae48e9b7",
-        "GUID:6be89e20416a874488fea8a7d3e68ab7",
-        "GUID:7aef4c9a6e44b4940a85fb20ec56d6d0",
-        "GUID:ee57f61991783934ebeffcaa2ea6d710",
-        "GUID:889b08493471d5748ae0707efddd6dc4",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:9094266f5033efb448de72cde62017ae"
     ],
     "includePlatforms": [],

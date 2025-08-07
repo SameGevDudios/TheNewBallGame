@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Bootstrap : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class Bootstrap : MonoBehaviour
 
     [Header("Waves")]
     [SerializeField] private List<Wave> _waves = new();
+
+    [Header("UI")]
+    [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private TMP_Text _moneyText;
 
     [Header("Player")]
     [SerializeField] private string _playerPoolTag;
@@ -20,6 +25,13 @@ public class Bootstrap : MonoBehaviour
     [Header("Battle speed")]
     [SerializeField] private float _applyDamageSpeed;
     [SerializeField] private float _attackSpeed;
+
+    [Header("Upgrades")]
+    [SerializeField] private int _damageAmount;
+    [SerializeField] private int _healthAmount;
+    [SerializeField] private float _speedAmount;
+    [SerializeField] private int _cost;
+    [SerializeField] private int _costStep;
 
     [Header("Level change")]
     [SerializeField] private float _playerMoveDistance;
@@ -69,11 +81,21 @@ public class Bootstrap : MonoBehaviour
         IMover mazeMover = new VerticalMover(null, _mazeMoveDistance, _mazeEventMoveDuration);
 
         // Instantiate battle
-        IBattle battle = new BattleEvent(eventCaller, player);
+        IBattle battle = new BattleEvent(_gameOverPanel, eventCaller, player);
+
+        // Instantiate UI
+        MoneyUI moneyUI = new MoneyUI(_moneyText);
 
         // Instantiate money storage
-        IBalance moneyBalance = new MoneyStorage();
+        IBalance moneyBalance = new MoneyStorage(moneyUI);
         IPurchasable purchasable = (IPurchasable)moneyBalance;
+
+        // Instantiate upgrades
+        Upgrade damageUpgrade = new DamageUpgrade((IDamageUpgradable)player, purchasable, _cost, _costStep, _damageAmount);
+        Upgrade healthUpgrade = new HealthUpgrade((IHealthUpgradable)player, purchasable, _cost, _costStep, _healthAmount);
+        Upgrade speedUpgrade = new SpeedUpgrade((ISpeedUpgradable)player, purchasable, _cost, _costStep, _speedAmount);
+        UpgradeSelector selector = player.gameObject.GetComponent<UpgradeSelector>();
+        selector.Init(eventCaller, damageUpgrade, healthUpgrade, speedUpgrade);
 
         // Instantiate events
         IGameEvent changer = new LevelChangeEvent(playerMover, backgroundSpawner, waveSpawner, eventCaller);
@@ -87,6 +109,7 @@ public class Bootstrap : MonoBehaviour
         eventCaller.Add(battleEvent);
         eventCaller.Add(mazeEvent);
         eventCaller.Add(ballEvent);
+        eventCaller.Add(selector);
 
         // Start game
         messenger.SetBattle(battle);

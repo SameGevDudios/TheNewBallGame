@@ -3,20 +3,22 @@ using UnityEngine;
 public class Player : Battling, IDamageUpgradable, IHealthUpgradable, ISpeedUpgradable
 {
     [SerializeField] private Transform _camera;
+    [SerializeField] private StatsUI _statsUI;
+
     protected override void Death()
     {
-        base.Death();
         _battle.PlayerKilled();
     }
 
     public Transform GetCamera() 
     { 
-        return _camera; 
+        return _camera;
     }
 
     public void GetDamageUpgrade(int amount)
     {
         _damage += amount;
+        _statsUI.UpdateDamageText(_damage);
     }
 
     public void GetHealthUpgrade(int amount)
@@ -28,5 +30,7 @@ public class Player : Battling, IDamageUpgradable, IHealthUpgradable, ISpeedUpgr
     {
         _applyDamageTime *= amount;
         _attackTime *= amount;
+        _statsUI.UpdateSpeedText();
     }
+
 }

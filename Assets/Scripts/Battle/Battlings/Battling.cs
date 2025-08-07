@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Battling : MonoBehaviour
 {
+    [SerializeField] private Image _healthBar;
+    private HealthBarUI _healthBarUI;
     protected IBattle _battle;
     private Battling _target;
 
@@ -16,6 +19,7 @@ public abstract class Battling : MonoBehaviour
         _damage = damage;
         _applyDamageTime = applyDamageTime;
         _attackTime = attackTime;
+        _healthBarUI = new HealthBarUI(_healthBar);
     }
 
     public virtual void Attack(Battling target)
@@ -33,7 +37,7 @@ public abstract class Battling : MonoBehaviour
     public void GetDamage(int damage)
     {
         _health -= damage;
-        // UpdateUI
+        _healthBarUI.UpdateBar(_health, _maxHealth);
         if(_health <= 0)
         {
             Death();
@@ -43,6 +47,7 @@ public abstract class Battling : MonoBehaviour
     public void Heal()
     {
         _health = _maxHealth;
+        _healthBarUI.UpdateBar(_health, _maxHealth);
     }
 
     protected virtual void Death()
