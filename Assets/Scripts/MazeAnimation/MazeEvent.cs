@@ -1,10 +1,12 @@
 public class MazeEvent : IGameEvent
 {
+    private ISpawner _spawner;
     private VerticalMover _cameraMover, _mazeMover;
     private IEventCaller _eventCaller;
 
-    public MazeEvent(VerticalMover cameraMover, VerticalMover mazeMover, IEventCaller eventCaller)
+    public MazeEvent(ISpawner spawner, VerticalMover cameraMover, VerticalMover mazeMover, IEventCaller eventCaller)
     {
+        _spawner = spawner;
         _cameraMover = cameraMover;
         _mazeMover = mazeMover;
         _eventCaller = eventCaller;
@@ -12,6 +14,7 @@ public class MazeEvent : IGameEvent
 
     public void Play()
     {
+        _mazeMover.SetNewMovable(_spawner.Spawn().transform);
         _cameraMover.Move();
         _mazeMover.Move();
         // Delay
