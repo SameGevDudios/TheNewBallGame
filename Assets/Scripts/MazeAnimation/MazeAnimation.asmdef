@@ -1,0 +1,17 @@
+{
+    "name": "MazeAnimation",
+    "rootNamespace": "",
+    "references": [
+        "GUID:4229ebeff00d7114c97a7da3e59b9ae4",
+        "GUID:7aef4c9a6e44b4940a85fb20ec56d6d0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
