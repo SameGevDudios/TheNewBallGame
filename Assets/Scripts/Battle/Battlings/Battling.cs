@@ -7,7 +7,6 @@ public abstract class Battling : MonoBehaviour
 
     private int _health, _damage;
     private float _applyDamageTime, _attackTime;
-    private bool _isDead;
 
     public void Init(IBattle battle, int health, int damage, float applyDamageTime, float attackTime)
     {
@@ -20,13 +19,10 @@ public abstract class Battling : MonoBehaviour
 
     public virtual void Attack(Battling target)
     {
-        if(!_isDead)
-        {
-            _target = target;
-            Invoke("ApplyDamage", _applyDamageTime);
-            Invoke("FinishAttack", _attackTime);
-            Debug.Log($"{gameObject.name} attacked {_target}!");
-        }
+        _target = target;
+        Invoke("ApplyDamage", _applyDamageTime);
+        Invoke("FinishAttack", _attackTime);
+        Debug.Log($"{gameObject.name} attacked {_target}!");
     }
 
     public void ApplyDamage()
@@ -48,7 +44,6 @@ public abstract class Battling : MonoBehaviour
     {
         Debug.Log($"{gameObject.name} died!");
         gameObject.SetActive(false);
-        _isDead = true;
     }
 
     private void FinishAttack()

@@ -5,7 +5,7 @@ public class Battle : IBattle, IGameEvent
     private IEventCaller _eventCaller;
     private Battling _player, _currentEntity;
     private Queue<Battling> _enemies;
-    private bool _playerTurn;
+    private bool _playerTurn, _enemiesAlive = true;
 
     public Battle(IEventCaller eventCaller, Battling player)
     {
@@ -15,22 +15,26 @@ public class Battle : IBattle, IGameEvent
 
     public void Play()
     {
+        _enemiesAlive = true;
         SetPlayerTurn();
         Attack();
     }
 
     public void Attack()
     {
-        if (_playerTurn)
+        if (_enemiesAlive)
         {
-            _currentEntity.Attack(_enemies.Peek());
-            _playerTurn = false;
-        }
-        else
-        {
-            GetNextEnemy();
-            _currentEntity.Attack(_player);
-            SetPlayerTurn();
+            if (_playerTurn)
+            {
+                _currentEntity.Attack(_enemies.Peek());
+                _playerTurn = false;
+            }
+            else
+            {
+                GetNextEnemy();
+                _currentEntity.Attack(_player);
+                SetPlayerTurn();
+            }
         }
     }
 
@@ -44,6 +48,7 @@ public class Battle : IBattle, IGameEvent
         _enemies.Dequeue();
         if(_enemies.Count == 0)
         {
+            _enemiesAlive = false;
             _eventCaller.PlayNext();
         }
     }
