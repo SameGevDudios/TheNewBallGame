@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class BattleEvent : IBattle, IGameEvent
 {
@@ -43,13 +44,13 @@ public class BattleEvent : IBattle, IGameEvent
         // Game over
     }
 
-    public void EnemyKilled()
+    public async Task EnemyKilled()
     {
         _enemies.Dequeue();
         if(_enemies.Count == 0)
         {
             _enemiesAlive = false;
-            _eventCaller.PlayNext();
+            await _eventCaller.PlayNext();
         }
     }
 

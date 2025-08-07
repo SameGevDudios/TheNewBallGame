@@ -1,5 +1,8 @@
+using System.Threading;
+using System.Threading.Tasks;
+
 public interface IEventCaller
 {
     void Add(IGameEvent newEvent);
-    void PlayNext();
+    Task PlayNext(CancellationToken cancellationToken = default);
 }
