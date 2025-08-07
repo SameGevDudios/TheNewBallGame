@@ -7,8 +7,9 @@ public class WaveSpawner : IWaveSpawner
     private List<Wave> _waves = new();
     private int _currentWave, _enemyBaseHeath, _enemyBaseDamage;
     private float _applyDamageTime, _attackTime;
+    private float _currentOffset, _spawnOffset;
 
-    public WaveSpawner(IPoolManager poolmanager, List<Wave> waves, int enemyBaseHealth, int enemyBaseDamage, float applyDamageTime, float attackTime) 
+    public WaveSpawner(IPoolManager poolmanager, List<Wave> waves, int enemyBaseHealth, int enemyBaseDamage, float applyDamageTime, float attackTime, float spawnOffset) 
     {
         _poolManager = poolmanager;
         _waves = waves;
@@ -16,6 +17,7 @@ public class WaveSpawner : IWaveSpawner
         _enemyBaseDamage = enemyBaseDamage;
         _applyDamageTime = applyDamageTime;
         _attackTime = attackTime;
+        _spawnOffset = spawnOffset;
     }
 
     public Queue<Battling> Spawn(IBattle sender)
@@ -24,11 +26,13 @@ public class WaveSpawner : IWaveSpawner
         int waveIndex = _currentWave % (_waves.Count - 1);
         foreach (Wave.Enemy enemy in _waves[waveIndex].Enemies) 
         {
-            GameObject buffer = _poolManager.InstantiateFromPool(enemy.EnemyObject.name, enemy.Position, Quaternion.identity);
+            Vector3 spawnPosition = enemy.Position + Vector3.right * _currentOffset;
+            GameObject buffer = _poolManager.InstantiateFromPool(enemy.EnemyObject.name, spawnPosition, Quaternion.identity);
             enemies.Enqueue(buffer.GetComponent<Battling>());
         }
         InitEnemies(sender, enemies);
         _currentWave++;
+        _currentOffset += _spawnOffset;
         return enemies;
     }
 
