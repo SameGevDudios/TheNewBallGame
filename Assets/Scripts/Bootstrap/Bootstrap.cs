@@ -22,8 +22,14 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private float _attackSpeed;
 
     [Header("Level change")]
-    [SerializeField] private float _moveDistance;
-    [SerializeField] private float _moveDuration;
+    [SerializeField] private float _playerMoveDistance;
+    [SerializeField] private float _playerMoveDuration;
+
+    [Header("Maze event")]
+    [SerializeField] private int _mazePrefabCount;
+    [SerializeField] private float _cameraMoveDistance;
+    [SerializeField] private float _mazeMoveDistance;
+    [SerializeField] private float _mazeEventMoveDuration;
 
     [Header("Event delay")]
     [SerializeField] private float _beforeEventDelay;
@@ -40,17 +46,22 @@ public class Bootstrap : MonoBehaviour
         // Instantiave wave messenger
         IWaveMessenger messenger = new WaveMessenger();
 
-        // Instantiate spawners
-        ISpawner waveSpawner = 
-            new WaveSpawner(poolManager, messenger, _waves, _enemyHealth, _enemyDamage, _applyDamageSpeed, _attackSpeed, _moveDistance);
-        ISpawner backgroundSpawner = new BackgroundSpawner(poolManager, _moveDistance);
-        
         // Instantiate player
         Battling player = poolManager.InstantiateFromPool(_playerPoolTag, _playerPosition, Quaternion.identity)
             .GetComponent<Player>();
+        Transform camera = ((Player)player).GetCamera();
+
+        // Instantiate spawners
+        ISpawner waveSpawner = 
+            new WaveSpawner(poolManager, messenger, _waves, _enemyHealth, _enemyDamage, _applyDamageSpeed, _attackSpeed, _playerMoveDistance);
+        ISpawner backgroundSpawner = new BackgroundSpawner(poolManager, _playerMoveDistance);
+        ISpawner mazeSpawner = new MazeSpawner(poolManager, player.transform, _mazeMoveDistance, _mazePrefabCount);
+        
 
         // Instantiate movers
-        IMover playerMover = new PlayerMover(player.transform, _moveDistance, _moveDuration);
+        IMover playerMover = new PlayerMover(player.transform, _playerMoveDistance, _playerMoveDuration);
+        IMover cameraMover = new VerticalMover(camera, _cameraMoveDistance, _mazeEventMoveDuration);
+        IMover mazeMover = new VerticalMover(null, _mazeMoveDistance, _mazeEventMoveDuration);
 
         // Instantiate systems
         
@@ -59,10 +70,12 @@ public class Bootstrap : MonoBehaviour
         // Instantiate events
         IGameEvent changer = new LevelChangeEvent(playerMover, backgroundSpawner, waveSpawner, eventCaller);
         IGameEvent battleEvent = (IGameEvent)battle;
+        IGameEvent mazeEvent = new MazeEvent(mazeSpawner, cameraMover, mazeMover, eventCaller);
 
         // Add events to queue
         eventCaller.Add(changer);
         eventCaller.Add(battleEvent);
+        eventCaller.Add(mazeEvent);
 
         // Start game
         messenger.SetBattle(battle);

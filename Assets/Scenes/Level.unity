@@ -170,8 +170,12 @@ MonoBehaviour:
   _enemyDamage: 10
   _applyDamageSpeed: 0
   _attackSpeed: 3
-  _moveDistance: 8
-  _moveDuration: 2
+  _playerMoveDistance: 8
+  _playerMoveDuration: 2
+  _mazePrefabCount: 3
+  _cameraMoveDistance: -2.54
+  _mazeMoveDistance: 10
+  _mazeEventMoveDuration: 2
   _beforeEventDelay: 3
   _afterEventDelay: 3
 --- !u!4 &2066783155
