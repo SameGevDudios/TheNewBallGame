@@ -10,6 +10,7 @@ public class Ball : MonoBehaviour, IBall
 
     public void Init(ISpawner ballSpawner)
     {
+        _canClone = false;
         _spawner = ballSpawner;
         Invoke("AllowClone", _cloneCooldown);
     }
