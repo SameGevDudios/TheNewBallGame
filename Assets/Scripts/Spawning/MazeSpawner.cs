@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class MazeSpawner : ISpawner
 {
-    private PoolManager _poolManager;
+    private IPoolManager _poolManager;
     private Transform _player;
     private float _spawnOffsetY;
     private int _currentMaze, _maxMaze;
 
-    public MazeSpawner(PoolManager poolManager, Transform player, float spawnOffsetY, int maxMaze)
+    public MazeSpawner(IPoolManager poolManager, Transform player, float spawnOffsetY, int maxMaze)
     {
         _poolManager = poolManager;
         _player = player;
