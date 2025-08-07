@@ -1,10 +1,10 @@
 public class MazeEvent : IGameEvent
 {
     private ISpawner _spawner;
-    private VerticalMover _cameraMover, _mazeMover;
+    private IMover _cameraMover, _mazeMover;
     private IEventCaller _eventCaller;
 
-    public MazeEvent(ISpawner spawner, VerticalMover cameraMover, VerticalMover mazeMover, IEventCaller eventCaller)
+    public MazeEvent(ISpawner spawner, IMover cameraMover, IMover mazeMover, IEventCaller eventCaller)
     {
         _spawner = spawner;
         _cameraMover = cameraMover;
