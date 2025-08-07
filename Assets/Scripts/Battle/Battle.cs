@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 
-public class Battle : IBattle
+public class Battle : IBattle, IGameEvent
 {
     private IWaveSpawner _waveSpawner;
+    private IGameEvent _nextEvent;
     private Battling _player, _currentEntity;
     private Queue<Battling> _enemies;
     private bool _playerTurn;
 
-    public Battle(IWaveSpawner waveSpawner, Battling player)
+    public Battle(IWaveSpawner waveSpawner,IGameEvent nextEvent, Battling player)
     {
         _waveSpawner = waveSpawner;
+        _nextEvent = nextEvent;
         _player = player;
         SetPlayerTurn();
         SpawnNewWave();
@@ -19,6 +21,11 @@ public class Battle : IBattle
     {
         _currentEntity = _player;
         _playerTurn = true;
+    }
+
+    public void Play()
+    {
+        Attack();
     }
 
     public void Attack()
@@ -44,7 +51,7 @@ public class Battle : IBattle
 
     public void PlayerKilled()
     {
-
+        // Game over
     }
 
     public void EnemyKilled()
@@ -58,9 +65,9 @@ public class Battle : IBattle
 
     private void NextWave()
     {
-
         SpawnNewWave();
         SetPlayerTurn();
+        _nextEvent.Play();
         // HealPlayer();
     }
 
