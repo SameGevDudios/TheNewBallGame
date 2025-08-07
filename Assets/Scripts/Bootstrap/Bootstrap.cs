@@ -56,7 +56,6 @@ public class Bootstrap : MonoBehaviour
             new WaveSpawner(poolManager, messenger, _waves, _enemyHealth, _enemyDamage, _applyDamageSpeed, _attackSpeed, _playerMoveDistance);
         ISpawner backgroundSpawner = new BackgroundSpawner(poolManager, _playerMoveDistance);
         ISpawner mazeSpawner = new MazeSpawner(poolManager, camera.transform, _mazeMoveDistance, _mazePrefabCount);
-        
 
         // Instantiate movers
         IMover playerMover = new PlayerMover(player.transform, _playerMoveDistance, _playerMoveDuration);
@@ -64,7 +63,6 @@ public class Bootstrap : MonoBehaviour
         IMover mazeMover = new VerticalMover(null, _mazeMoveDistance, _mazeEventMoveDuration);
 
         // Instantiate systems
-        
         IBattle battle = new BattleEvent(eventCaller, player);
 
         // Instantiate events
