@@ -27,21 +27,43 @@ public class Bootstrap : MonoBehaviour
 
     private void Awake()
     {
+        // Instantiate event caller
+        IEventCaller eventCaller = new EventCaller();
+
         // Instantiate pool manager
         IPoolManager poolManager = new PoolManager(_pools);
+
+        // Instantiave wave messenger
+        IWaveMessenger messenger = new WaveMessenger();
+        
+        // Instantiate spawners
         IWaveSpawner waveSpawner = 
-            new WaveSpawner(poolManager, _waves, _enemyHealth, _enemyDamage, _applyDamageSpeed, _attackSpeed, _moveDistance);
+            new WaveSpawner(poolManager, messenger, _waves, _enemyHealth, _enemyDamage, _applyDamageSpeed, _attackSpeed, _moveDistance);
         IBackgroundSpawner backgroundSpawner = new BackgroundSpawner(poolManager, _moveDistance);
+        
+        // Instantiate player
         Battling player = poolManager.InstantiateFromPool(_playerPoolTag, _playerPosition, Quaternion.identity)
-            .GetComponent<Battling>();
-        IPlayerMover playerMover = new PlayerMover(player.transform, _moveDistance, _moveDuration);
-        IGameEvent changer = new LevelChanger(playerMover, backgroundSpawner);
-        IBattle battle = new Battle(waveSpawner, changer, player);
-        player.Init(battle, _playerHealth, _playerDamage, _applyDamageSpeed, _attackSpeed);
+            .GetComponent<Player>();
+
+        // Instantiate movers
+        IMover playerMover = new PlayerMover(player.transform, _moveDistance, _moveDuration);
+
+        // Instantiate systems
+        
+        IBattle battle = new Battle(eventCaller, player);
+
+        // Instantiate events
+        IGameEvent changer = new LevelChanger(playerMover, backgroundSpawner, waveSpawner, eventCaller);
+        IGameEvent battleEvent = (IGameEvent)battle;
+
+        // Add events to queue
+        eventCaller.Add(changer);
+        eventCaller.Add(battleEvent);
 
         // Start game
-        IGameEvent battleEvent = (IGameEvent)battle;
-        battleEvent.Play();
+        messenger.SetBattle(battle);
+        player.Init(battle, _playerHealth, _playerDamage, _applyDamageSpeed, _attackSpeed);
+        eventCaller.PlayNext();
     }
 
     private void OnDrawGizmosSelected()
