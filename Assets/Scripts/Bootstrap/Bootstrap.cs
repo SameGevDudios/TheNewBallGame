@@ -10,6 +10,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private List<Wave> _waves = new();
 
     [Header("Player")]
+    [SerializeField] private string _playerPoolTag;
     [SerializeField] private Vector3 _playerPosition;
     [SerializeField] private int _playerHealth, _playerDamage;
     [SerializeField] private float _applyDamageSpeed, _attackSpeed;
@@ -22,7 +23,7 @@ public class Bootstrap : MonoBehaviour
     {
         // Instantiate pool manager
         IPoolManager poolManager = new PoolManager(_pools);
-        Battling player = poolManager.InstantiateFromPool("player", _playerPosition, Quaternion.identity)
+        Battling player = poolManager.InstantiateFromPool(_playerPoolTag, _playerPosition, Quaternion.identity)
             .GetComponent<Battling>();
         IWaveSpawner waveSpawner = 
             new WaveSpawner(poolManager, _waves, _enemyHealth, _enemyDamage, _applyDamageSpeed, _attackSpeed);
