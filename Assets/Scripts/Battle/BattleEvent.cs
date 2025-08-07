@@ -8,7 +8,7 @@ public class BattleEvent : IBattle, IGameEvent
     private IEventCaller _eventCaller;
     private Battling _player, _currentEntity;
     private Queue<Battling> _enemies;
-    private bool _playerTurn, _enemiesAlive = true;
+    private bool _playerTurn, _canAttack = true;
 
     public BattleEvent(GameObject gameOverPanel, IEventCaller eventCaller, Battling player)
     {
@@ -19,7 +19,7 @@ public class BattleEvent : IBattle, IGameEvent
 
     public void Play()
     {
-        _enemiesAlive = true;
+        _canAttack = true;
         _player.Heal();
         SetPlayerTurn();
         Attack();
@@ -27,7 +27,7 @@ public class BattleEvent : IBattle, IGameEvent
 
     public void Attack()
     {
-        if (_enemiesAlive)
+        if (_canAttack)
         {
             if (_playerTurn)
             {
@@ -46,6 +46,7 @@ public class BattleEvent : IBattle, IGameEvent
     public void PlayerKilled()
     {
         _gameOverPanel.SetActive(true);
+        _canAttack = false;
     }
 
     public async Task EnemyKilled()
@@ -53,7 +54,7 @@ public class BattleEvent : IBattle, IGameEvent
         _enemies.Dequeue();
         if(_enemies.Count == 0)
         {
-            _enemiesAlive = false;
+            _canAttack = false;
             await _eventCaller.PlayNext();
         }
     }
