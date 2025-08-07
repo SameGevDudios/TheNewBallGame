@@ -1,11 +1,10 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class PlayerMover : IPlayerMover
+public class PlayerMover : IMover
 {
     private Transform _player;
-    private float _moveDistance;
-    private float _moveDuration;
+    private float _moveDistance, _moveDuration;
 
     public PlayerMover(Transform player, float moveDistance, float moveDuration)
     {
