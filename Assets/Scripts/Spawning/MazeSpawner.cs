@@ -3,14 +3,14 @@ using UnityEngine;
 public class MazeSpawner : ISpawner
 {
     private IPoolManager _poolManager;
-    private Transform _player;
+    private Transform _spawnAnchor;
     private float _spawnOffsetY;
     private int _currentMaze, _maxMaze;
 
-    public MazeSpawner(IPoolManager poolManager, Transform player, float spawnOffsetY, int maxMaze)
+    public MazeSpawner(IPoolManager poolManager, Transform spawnAnchor, float spawnOffsetY, int maxMaze)
     {
         _poolManager = poolManager;
-        _player = player;
+        _spawnAnchor = spawnAnchor;
         _spawnOffsetY = spawnOffsetY;
         _maxMaze = maxMaze;
     }
