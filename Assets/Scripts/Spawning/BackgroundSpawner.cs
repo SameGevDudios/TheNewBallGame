@@ -3,7 +3,6 @@ using UnityEngine;
 public class BackgroundSpawner : ISpawner
 {
     private IPoolManager _poolManager;
-    private GameObject _currentBackground;
     private Vector3 _spawnPosition;
     private float _spawnOffset;
 
