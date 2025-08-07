@@ -18,4 +18,9 @@ public class VerticalMover : IMover
         _movable.DOMoveY(_movable.position.y + _moveDistance, _moveDuration);
         _moveDistance = -_moveDistance;
     }
+
+    public void SetNewMovable(Transform movable)
+    {
+        _movable = movable;
+    }
 }
