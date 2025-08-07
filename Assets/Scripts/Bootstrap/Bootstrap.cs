@@ -21,7 +21,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private float _applyDamageSpeed;
     [SerializeField] private float _attackSpeed;
 
-    [Header("LevelChange")]
+    [Header("Level change")]
     [SerializeField] private float _moveDistance;
     [SerializeField] private float _moveDuration;
 
