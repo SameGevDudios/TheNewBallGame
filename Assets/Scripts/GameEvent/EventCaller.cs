@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class EventCaller : IEventCaller
 {
@@ -13,12 +12,8 @@ public class EventCaller : IEventCaller
 
     public void PlayNext()
     {
-        Debug.Log($"Event order: {JoinQueue<IGameEvent>(_gameLoop)}");
         _currentEvent = _gameLoop.Dequeue();
-        Debug.Log($"Now executing event {_currentEvent}.");
         _gameLoop.Enqueue(_currentEvent);
         _currentEvent.Play();
     }
-
-    string JoinQueue<T>(Queue<T> q) => string.Join(" ", q);
 }
