@@ -50,10 +50,10 @@ public class Bootstrap : MonoBehaviour
 
         // Instantiate systems
         
-        IBattle battle = new Battle(eventCaller, player);
+        IBattle battle = new BattleEvent(eventCaller, player);
 
         // Instantiate events
-        IGameEvent changer = new LevelChanger(playerMover, backgroundSpawner, waveSpawner, eventCaller);
+        IGameEvent changer = new LevelChangeEvent(playerMover, backgroundSpawner, waveSpawner, eventCaller);
         IGameEvent battleEvent = (IGameEvent)battle;
 
         // Add events to queue

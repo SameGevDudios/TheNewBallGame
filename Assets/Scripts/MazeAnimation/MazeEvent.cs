@@ -1,9 +1,9 @@
-public class MazeMover : IGameEvent
+public class MazeEvent : IGameEvent
 {
     private VerticalMover _cameraMover, _mazeMover;
     private IEventCaller _eventCaller;
 
-    public MazeMover(VerticalMover cameraMover, VerticalMover mazeMover, IEventCaller eventCaller)
+    public MazeEvent(VerticalMover cameraMover, VerticalMover mazeMover, IEventCaller eventCaller)
     {
         _cameraMover = cameraMover;
         _mazeMover = mazeMover;

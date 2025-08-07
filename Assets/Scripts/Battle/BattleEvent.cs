@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 
-public class Battle : IBattle, IGameEvent
+public class BattleEvent : IBattle, IGameEvent
 {
     private IEventCaller _eventCaller;
     private Battling _player, _currentEntity;
     private Queue<Battling> _enemies;
     private bool _playerTurn, _enemiesAlive = true;
 
-    public Battle(IEventCaller eventCaller, Battling player)
+    public BattleEvent(IEventCaller eventCaller, Battling player)
     {
         _eventCaller = eventCaller;
         _player = player;
