@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pools:
+  - {fileID: 11400000, guid: 22898985ef251f1459b22bc905b0a50d, type: 2}
   - {fileID: 11400000, guid: a09b4008bd483444eabe0e1d113b619b, type: 2}
   - {fileID: 11400000, guid: f0c8efd7779a9ff48b119aec8214aa23, type: 2}
   _waves:
@@ -309,13 +310,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 28bd7a83575df06478179fb1d7c81408, type: 2}
   - {fileID: 11400000, guid: 5e2e592f73313e343be7de40d65164be, type: 2}
   - {fileID: 11400000, guid: e1cb371f0ed110843a397504c1d55cb8, type: 2}
+  _playerPoolTag: player
   _playerPosition: {x: -2, y: 0.79, z: 0}
   _playerHealth: 100
   _playerDamage: 20
-  _applyDamageSpeed: 0
-  _attackSpeed: 3
   _enemyHealth: 40
   _enemyDamage: 10
+  _applyDamageSpeed: 0
+  _attackSpeed: 3
+  _moveDistance: 8
+  _moveDuration: 2
 --- !u!4 &2066783155
 Transform:
   m_ObjectHideFlags: 0
@@ -335,6 +339,5 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 519420032}
   - {fileID: 2066783155}
   - {fileID: 822226279}
