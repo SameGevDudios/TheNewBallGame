@@ -33,11 +33,11 @@ public class Battle : IBattle, IGameEvent
         if (_playerTurn)
         {
             _currentEntity.Attack(_enemies.Peek());
-            GetNextEnemy();
             _playerTurn = false;
         }
         else
         {
+            GetNextEnemy();
             _currentEntity.Attack(_player);
             SetPlayerTurn();
         }
