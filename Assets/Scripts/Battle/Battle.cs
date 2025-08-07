@@ -2,29 +2,20 @@ using System.Collections.Generic;
 
 public class Battle : IBattle, IGameEvent
 {
-    private IWaveSpawner _waveSpawner;
-    private IGameEvent _nextEvent;
+    private IEventCaller _eventCaller;
     private Battling _player, _currentEntity;
     private Queue<Battling> _enemies;
     private bool _playerTurn;
 
-    public Battle(IWaveSpawner waveSpawner,IGameEvent nextEvent, Battling player)
+    public Battle(IEventCaller eventCaller, Battling player)
     {
-        _waveSpawner = waveSpawner;
-        _nextEvent = nextEvent;
+        _eventCaller = eventCaller;
         _player = player;
-        SetPlayerTurn();
-        SpawnNewWave();
-    }
-
-    private void SetPlayerTurn()
-    {
-        _currentEntity = _player;
-        _playerTurn = true;
     }
 
     public void Play()
     {
+        SetPlayerTurn();
         Attack();
     }
 
@@ -42,12 +33,6 @@ public class Battle : IBattle, IGameEvent
             SetPlayerTurn();
         }
     }
-    
-    private void GetNextEnemy()
-    {
-        _currentEntity = _enemies.Dequeue();
-        _enemies.Enqueue(_currentEntity);
-    }
 
     public void PlayerKilled()
     {
@@ -59,20 +44,24 @@ public class Battle : IBattle, IGameEvent
         _enemies.Dequeue();
         if(_enemies.Count == 0)
         {
-            NextWave();
+            _eventCaller.PlayNext();
         }
     }
 
-    private void NextWave()
+    public void SetEnemies(Queue<Battling> enemies) 
     {
-        SpawnNewWave();
-        SetPlayerTurn();
-        _nextEvent.Play();
-        // HealPlayer();
+        _enemies = enemies;
     }
 
-    private void SpawnNewWave()
+    private void SetPlayerTurn()
     {
-        _enemies = _waveSpawner.Spawn(this);
+        _currentEntity = _player;
+        _playerTurn = true;
+    }
+
+    private void GetNextEnemy()
+    {
+        _currentEntity = _enemies.Dequeue();
+        _enemies.Enqueue(_currentEntity);
     }
 }
