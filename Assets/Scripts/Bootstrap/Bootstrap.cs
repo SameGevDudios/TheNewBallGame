@@ -42,20 +42,16 @@ public class Bootstrap : MonoBehaviour
 
     private void Awake()
     {
-        // Instantiate event caller
-        IEventCaller eventCaller = new EventCaller(_beforeEventDelay, _afterEventDelay);
-
         // Instantiate pool manager
         IPoolManager poolManager = new PoolManager(_pools);
-
-        // Instantiave wave messenger
-        IWaveMessenger messenger = new WaveMessenger();
 
         // Instantiate player
         Battling player = poolManager.InstantiateFromPool(_playerPoolTag, _playerPosition, Quaternion.identity)
             .GetComponent<Player>();
         Transform camera = ((Player)player).GetCamera();
 
+        // Instantiave wave messenger
+        IWaveMessenger messenger = new WaveMessenger();
 
         // Instantiate spawners
         ISpawner waveSpawner = 
@@ -64,20 +60,27 @@ public class Bootstrap : MonoBehaviour
         ISpawner mazeSpawner = new MazeSpawner(poolManager, camera.transform, _mazeMoveDistance, _mazePrefabCount);
         ISpawner ballSpawner = new BallSpawner(poolManager, _ballPoolTag);
 
+        // Instantiate event caller
+        IEventCaller eventCaller = new EventCaller(_beforeEventDelay, _afterEventDelay);
+
         // Instantiate movers
         IMover playerMover = new PlayerMover(player.transform, _playerMoveDistance, _playerMoveDuration);
         IMover cameraMover = new VerticalMover(camera, _cameraMoveDistance, _mazeEventMoveDuration);
         IMover mazeMover = new VerticalMover(null, _mazeMoveDistance, _mazeEventMoveDuration);
 
-        // Instantiate systems
+        // Instantiate battle
         IBattle battle = new BattleEvent(eventCaller, player);
+
+        // Instantiate money storage
+        IBalance moneyBalance = new MoneyStorage();
+        IPurchasable purchasable = (IPurchasable)moneyBalance;
 
         // Instantiate events
         IGameEvent changer = new LevelChangeEvent(playerMover, backgroundSpawner, waveSpawner, eventCaller);
         IGameEvent battleEvent = (IGameEvent)battle;
         IGameEvent mazeEvent = new MazeEvent(mazeSpawner, cameraMover, mazeMover, eventCaller);
         BallEvent ballEvent = poolManager.InstantiateFromPool(_ballEventPoolTag, Vector3.zero, Quaternion.identity).GetComponent<BallEvent>();
-        ballEvent.Init(ballSpawner, eventCaller, mazeEvent, _ballSpawnDelay, _ballSpawnPositionY);
+        ballEvent.Init(ballSpawner, eventCaller, mazeEvent, moneyBalance, _ballSpawnDelay, _ballSpawnPositionY);
 
         // Add events to queue
         eventCaller.Add(changer);

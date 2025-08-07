@@ -1,11 +1,7 @@
 {
-    "name": "BallDrop",
+    "name": "Upgrades",
     "rootNamespace": "",
     "references": [
-        "GUID:88306880be7790f469fdf954ab645ea6",
-        "GUID:4229ebeff00d7114c97a7da3e59b9ae4",
-        "GUID:ee57f61991783934ebeffcaa2ea6d710",
-        "GUID:7273568a0947e1b44b5baf7cd0c1e065",
         "GUID:6be89e20416a874488fea8a7d3e68ab7"
     ],
     "includePlatforms": [],

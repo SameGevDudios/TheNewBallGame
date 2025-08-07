@@ -6,6 +6,7 @@ public class BallEvent : MonoBehaviour, IGameEvent
     private ISpawner _ballSpawner;
     private IEventCaller _eventCaller;
     private IGameEvent _mazeEvent;
+    private IBalance _balance;
     private Vector3 _touchPosition;
     private float _spawnDelay, _spawnPositionY;
     private bool _canSpawn;
@@ -20,11 +21,13 @@ public class BallEvent : MonoBehaviour, IGameEvent
     }
     #endregion
 
-    public void Init(ISpawner ballSpawner, IEventCaller eventCaller, IGameEvent mazeEvent, float spawnDelay, float spawnPositionY)
+    public void Init(ISpawner ballSpawner, IEventCaller eventCaller, IGameEvent mazeEvent, 
+        IBalance balance, float spawnDelay, float spawnPositionY)
     {
         _ballSpawner = ballSpawner;
         _eventCaller = eventCaller;
         _mazeEvent = mazeEvent;
+        _balance = balance;
         _spawnDelay = spawnDelay;
         _spawnPositionY = spawnPositionY;
     }
@@ -86,6 +89,7 @@ public class BallEvent : MonoBehaviour, IGameEvent
     public void RemoveBall()
     {
         _ballCount--;
+        _balance.Add();
         if(_ballCount == 0)
         {
             _canSpawn = false;

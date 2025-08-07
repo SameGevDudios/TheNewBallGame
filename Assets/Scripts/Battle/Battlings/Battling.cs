@@ -5,13 +5,14 @@ public abstract class Battling : MonoBehaviour
     protected IBattle _battle;
     private Battling _target;
 
-    private int _health, _damage;
-    private float _applyDamageTime, _attackTime;
+    protected int _maxHealth, _health, _damage;
+    protected float _applyDamageTime, _attackTime;
 
     public void Init(IBattle battle, int health, int damage, float applyDamageTime, float attackTime)
     {
         _battle = battle;
-        _health = health;
+        _maxHealth = health;
+        _health = _maxHealth;
         _damage = damage;
         _applyDamageTime = applyDamageTime;
         _attackTime = attackTime;
@@ -37,6 +38,11 @@ public abstract class Battling : MonoBehaviour
         {
             Death();
         }
+    }
+
+    public void Heal()
+    {
+        _health = _maxHealth;
     }
 
     protected virtual void Death()
