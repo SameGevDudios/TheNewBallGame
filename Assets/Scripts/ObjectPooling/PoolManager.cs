@@ -6,6 +6,7 @@ public class PoolManager : IPoolManager
     private Dictionary<string, Queue<GameObject>> _poolDictionary = new();
     private List<Pool> _pools;
     private GameObject _poolHandler;
+    private static int s_poolCount = 0;
 
     public PoolManager(List<Pool> pools)
     {
@@ -26,6 +27,8 @@ public class PoolManager : IPoolManager
         Pool pool = FindByName(_pools, tag);
         GameObject buffer = GameObject.Instantiate(pool.Object, _poolHandler.transform);
         buffer.SetActive(false);
+        buffer.name += $"_{s_poolCount}";
+        s_poolCount++;
         _poolDictionary[tag].Enqueue(buffer);
     }
 
