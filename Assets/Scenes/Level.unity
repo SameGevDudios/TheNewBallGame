@@ -171,6 +171,8 @@ MonoBehaviour:
   _attackSpeed: 3
   _moveDistance: 8
   _moveDuration: 2
+  _beforeEventDelay: 3
+  _afterEventDelay: 3
 --- !u!4 &2066783155
 Transform:
   m_ObjectHideFlags: 0
