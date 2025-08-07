@@ -25,10 +25,14 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private float _moveDistance;
     [SerializeField] private float _moveDuration;
 
+    [Header("Event delay")]
+    [SerializeField] private float _beforeEventDelay;
+    [SerializeField] private float _afterEventDelay;
+
     private void Awake()
     {
         // Instantiate event caller
-        IEventCaller eventCaller = new EventCaller();
+        IEventCaller eventCaller = new EventCaller(_beforeEventDelay, _afterEventDelay);
 
         // Instantiate pool manager
         IPoolManager poolManager = new PoolManager(_pools);
