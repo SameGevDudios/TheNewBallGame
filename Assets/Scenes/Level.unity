@@ -1142,7 +1142,7 @@ MonoBehaviour:
   _speedAmount: 0.9
   _cost: 10
   _costStep: 3
-  _playerMoveDistance: 12
+  _playerMoveDistance: 20
   _playerMoveDuration: 2
   _mazePrefabCount: 3
   _cameraMoveDistance: -2.54
