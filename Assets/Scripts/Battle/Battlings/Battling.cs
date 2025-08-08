@@ -59,7 +59,7 @@ public abstract class Battling : MonoBehaviour
         _health -= damage;
 
         _healthUI.UpdateHealth(_health, _maxHealth);
-        _hitUI.ShowHit(transform.position, _damage);
+        _hitUI.ShowHit(transform.position, damage);
         
         if (_health <= 0)
         {
