@@ -1148,10 +1148,10 @@ MonoBehaviour:
   _cameraMoveDistance: -2.54
   _mazeMoveDistance: 10
   _mazeEventMoveDuration: 2
-  _ballSpawnDelay: 0.5
+  _ballSpawnDelay: 0.2
   _ballSpawnPositionY: -1
-  _beforeEventDelay: 1
-  _afterEventDelay: 2
+  _beforeEventDelay: 0.5
+  _afterEventDelay: 1.7
   _hitTextDistance: 10
   _hitTextDuration: 5
   _hitScaleDuration: 1
