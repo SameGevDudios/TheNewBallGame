@@ -112,7 +112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1140677664266841240}
-  - component: {fileID: 9143855554660958344}
+  - component: {fileID: 485352666480263549}
   m_Layer: 0
   m_Name: RangeEnemy
   m_TagString: Untagged
@@ -139,7 +139,7 @@ Transform:
   - {fileID: 1803637893465866322}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9143855554660958344
+--- !u!114 &485352666480263549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,11 +148,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1118466629101203988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4650ddf69a1dadb4f89fb9ee0184362b, type: 3}
+  m_Script: {fileID: 11500000, guid: f7a403bec289a0c4b851dcecbd018d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 6406088699785359142}
-  _weapon: {fileID: 0}
+  _weapon: {fileID: 7089009768999792358}
 --- !u!1 &1570225233013706502
 GameObject:
   m_ObjectHideFlags: 0
