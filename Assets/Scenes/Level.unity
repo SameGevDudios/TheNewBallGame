@@ -1122,10 +1122,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dd54a1dccde2cbb44bacace3d39fae6f, type: 2}
   - {fileID: 11400000, guid: e38532b9a24b73a4292ee658f9bbd3c8, type: 2}
   _waves:
-  - {fileID: 11400000, guid: 9cd47af899dcd104fb0310cf444ff984, type: 2}
-  - {fileID: 11400000, guid: 28bd7a83575df06478179fb1d7c81408, type: 2}
-  - {fileID: 11400000, guid: 5e2e592f73313e343be7de40d65164be, type: 2}
-  - {fileID: 11400000, guid: e1cb371f0ed110843a397504c1d55cb8, type: 2}
+  - {fileID: 11400000, guid: dc9c108c2f0efc941a0247c39aafad56, type: 2}
+  - {fileID: 11400000, guid: 3c699e2d8bb15434299ada5cb9ee71a4, type: 2}
+  - {fileID: 11400000, guid: 49849f81bf2708d4d96f934d274b725c, type: 2}
+  - {fileID: 11400000, guid: 796b818b4c1a4ac4ba2b38589a60e347, type: 2}
   _gameOverPanel: {fileID: 2084836849}
   _moneyText: {fileID: 501930002}
   _ballText: {fileID: 1433914470}

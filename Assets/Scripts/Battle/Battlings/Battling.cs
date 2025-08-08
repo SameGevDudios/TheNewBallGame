@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public abstract class Battling : MonoBehaviour
 {
+    [SerializeField] private TMP_Text _healthText;
     [SerializeField] private Image _healthBar;
     [SerializeField] private Weapon _weapon;
 
-    private HealthBarUI _healthBarUI;
+    private HealthUI _healthUI;
     protected Battling _target;
 
     protected IBattle _battle;
@@ -25,7 +27,7 @@ public abstract class Battling : MonoBehaviour
         _damage = damage;
         _applyDamageTime = applyDamageTime;
         _attackTime = attackTime;
-        _healthBarUI = new HealthBarUI(_healthBar);
+        _healthUI = new HealthUI(_healthText, _healthBar);
     }
 
     public virtual void Attack(Battling target)
@@ -56,7 +58,7 @@ public abstract class Battling : MonoBehaviour
     {
         _health -= damage;
 
-        _healthBarUI.UpdateBar(_health, _maxHealth);
+        _healthUI.UpdateHealth(_health, _maxHealth);
         _hitUI.ShowHit(transform.position, _damage);
         
         if (_health <= 0)
@@ -72,7 +74,7 @@ public abstract class Battling : MonoBehaviour
     public void Heal()
     {
         _health = _maxHealth;
-        _healthBarUI.UpdateBar(_health, _maxHealth);
+        _healthUI.UpdateHealth(_health, _maxHealth);
     }
 
     private void FinishAttack()
