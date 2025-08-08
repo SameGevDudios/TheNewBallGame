@@ -19,4 +19,11 @@ public class BackgroundSpawner : ISpawner
         _spawnPosition += Vector3.right * _spawnOffset;
         return buffer;
     }
+
+    public GameObject Spawn(Vector3 position)
+    {
+        GameObject buffer = Spawn();
+        buffer.transform.position = position;
+        return buffer;
+    }
 }

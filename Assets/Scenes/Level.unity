@@ -1106,7 +1106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f134ea30a8b962458805313dc24e53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerPoolTag: player
+  _ballPoolTag: ball
+  _ballEventPoolTag: ballEvent
+  _hitTextPoolTag: HitText
   _pools:
+  - {fileID: 11400000, guid: ba7d2792075e60b40b23165b1684754c, type: 2}
   - {fileID: 11400000, guid: e531d73ee9f302c42af6ba8ec3aa91c0, type: 2}
   - {fileID: 11400000, guid: 22898985ef251f1459b22bc905b0a50d, type: 2}
   - {fileID: 11400000, guid: a09b4008bd483444eabe0e1d113b619b, type: 2}
@@ -1124,7 +1129,6 @@ MonoBehaviour:
   _gameOverPanel: {fileID: 2084836849}
   _moneyText: {fileID: 501930002}
   _ballText: {fileID: 1433914470}
-  _playerPoolTag: player
   _playerPosition: {x: -2, y: 0.79, z: 0}
   _playerHealth: 100
   _playerDamage: 10
@@ -1144,12 +1148,13 @@ MonoBehaviour:
   _cameraMoveDistance: -2.54
   _mazeMoveDistance: 10
   _mazeEventMoveDuration: 2
-  _ballPoolTag: ball
-  _ballEventPoolTag: ballEvent
   _ballSpawnDelay: 0.5
   _ballSpawnPositionY: -1
   _beforeEventDelay: 1
   _afterEventDelay: 2
+  _hitTextDistance: 10
+  _hitTextDuration: 5
+  _hitScaleDuration: 1
 --- !u!4 &2066783155
 Transform:
   m_ObjectHideFlags: 0

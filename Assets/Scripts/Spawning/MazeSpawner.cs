@@ -24,6 +24,13 @@ public class MazeSpawner : ISpawner
         return buffer;
     }
 
+    public GameObject Spawn(Vector3 position)
+    {
+        GameObject buffer = Spawn();
+        buffer.transform.position = position;
+        return buffer;
+    }
+
     private void NextMaze()
     {
         _currentMaze++;

@@ -5,16 +5,21 @@ public abstract class Battling : MonoBehaviour
 {
     [SerializeField] private Image _healthBar;
     [SerializeField] private Weapon _weapon;
+
     private HealthBarUI _healthBarUI;
-    protected IBattle _battle;
     protected Battling _target;
+
+    protected IBattle _battle;
+
+    private HitTextUI _hitUI;
 
     protected int _maxHealth, _health, _damage;
     protected float _applyDamageTime, _attackTime;
 
-    public virtual void Init(IBattle battle, int health, int damage, float applyDamageTime, float attackTime)
+    public virtual void Init(IBattle battle, HitTextUI textUI, int health, int damage, float applyDamageTime, float attackTime)
     {
         _battle = battle;
+        _hitUI = textUI;
         _maxHealth = health;
         _health = _maxHealth;
         _damage = damage;
@@ -50,8 +55,11 @@ public abstract class Battling : MonoBehaviour
     public void GetDamage(int damage)
     {
         _health -= damage;
+
         _healthBarUI.UpdateBar(_health, _maxHealth);
-        if(_health <= 0)
+        _hitUI.ShowHit(transform.position, _damage);
+        
+        if (_health <= 0)
         {
             Death();
         }

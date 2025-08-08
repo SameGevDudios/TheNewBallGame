@@ -5,6 +5,10 @@ using TMPro;
 public class Bootstrap : MonoBehaviour
 {
     [Header("Object pooling")]
+    [SerializeField] private string _playerPoolTag;
+    [SerializeField] private string _ballPoolTag;
+    [SerializeField] private string _ballEventPoolTag;
+    [SerializeField] private string _hitTextPoolTag;
     [SerializeField] private List<Pool> _pools = new();
 
     [Header("Waves")]
@@ -16,7 +20,6 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private TMP_Text _ballText;
 
     [Header("Player")]
-    [SerializeField] private string _playerPoolTag;
     [SerializeField] private Vector3 _playerPosition;
     [SerializeField] private int _playerHealth, _playerDamage;
 
@@ -47,13 +50,16 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private float _mazeEventMoveDuration;
 
     [Header("Ball event")]
-    [SerializeField] private string _ballPoolTag;
-    [SerializeField] private string _ballEventPoolTag;
     [SerializeField] private float _ballSpawnDelay, _ballSpawnPositionY;
 
     [Header("Event delay")]
     [SerializeField] private float _beforeEventDelay;
     [SerializeField] private float _afterEventDelay;
+
+    [Header("Hit text")]
+    [SerializeField] private float _hitTextDistance;
+    [SerializeField] private float _hitTextDuration;
+    [SerializeField] private float _hitScaleDuration;
 
     private void Awake()
     {
@@ -74,6 +80,7 @@ public class Bootstrap : MonoBehaviour
         ISpawner backgroundSpawner = new BackgroundSpawner(poolManager, _playerMoveDistance);
         ISpawner mazeSpawner = new MazeSpawner(poolManager, camera.transform, _mazeMoveDistance, _mazePrefabCount);
         ISpawner ballSpawner = new BallSpawner(poolManager, _ballPoolTag);
+        ISpawner hitTextSpawner = new HitTextSpawner(poolManager, _hitTextPoolTag);
 
         // Instantiate event caller
         IEventCaller eventCaller = new EventCaller(_beforeEventDelay, _afterEventDelay);
@@ -89,6 +96,7 @@ public class Bootstrap : MonoBehaviour
         // Instantiate UI
         MoneyUI moneyUI = new MoneyUI(_moneyText);
         BallCountUI ballUI = new BallCountUI(_ballText);
+        HitTextUI hitUI = new HitTextUI(hitTextSpawner, _hitTextDistance, _hitTextDuration, _hitScaleDuration);
 
         // Instantiate money storage
         IBalance moneyBalance = new MoneyStorage(moneyUI);
@@ -117,7 +125,8 @@ public class Bootstrap : MonoBehaviour
 
         // Start game
         messenger.SetBattle(battle);
-        player.Init(battle, _playerHealth, _playerDamage, _applyDamageSpeed, _attackSpeed);
+        ((WaveSpawner)waveSpawner).SetHitUI(hitUI);
+        player.Init(battle, hitUI, _playerHealth, _playerDamage, _applyDamageSpeed, _attackSpeed);
         eventCaller.PlayNext();
     }
 

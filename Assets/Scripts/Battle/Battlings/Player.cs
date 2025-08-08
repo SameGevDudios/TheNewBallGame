@@ -5,9 +5,9 @@ public class Player : Battling, IDamageUpgradable, IHealthUpgradable, ISpeedUpgr
     [SerializeField] private Transform _camera;
     [SerializeField] private StatsUI _statsUI;
 
-    public override void Init(IBattle battle, int health, int damage, float applyDamageTime, float attackTime)
+    public override void Init(IBattle battle, HitTextUI hitUI, int health, int damage, float applyDamageTime, float attackTime)
     {
-        base.Init(battle, health, damage, applyDamageTime, attackTime);
+        base.Init(battle, hitUI, health, damage, applyDamageTime, attackTime);
         _statsUI.UpdateDamageText(_damage);
     }
     protected override void Death()

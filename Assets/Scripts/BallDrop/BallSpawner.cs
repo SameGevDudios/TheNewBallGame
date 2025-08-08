@@ -18,4 +18,11 @@ public class BallSpawner : ISpawner
         ball.Init(this);
         return buffer;
     }
+
+    public GameObject Spawn(Vector3 position)
+    {
+        GameObject buffer = Spawn();
+        buffer.transform.position = position;
+        return buffer;
+    }
 }

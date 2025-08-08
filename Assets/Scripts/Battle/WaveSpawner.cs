@@ -6,12 +6,14 @@ public class WaveSpawner : ISpawner
     private IPoolManager _poolManager;
     private IWaveMessenger _messenger;
 
+    private HitTextUI _hitUI;
+
     private List<Wave> _waves = new();
     private int _currentWave, _enemyBaseHeath, _enemyBaseDamage, _addBallCount;
     private float _applyDamageTime, _attackTime;
     private float _currentOffset, _spawnOffset;
 
-    public WaveSpawner(IPoolManager poolmanager, IWaveMessenger messenger, List<Wave> waves, 
+    public WaveSpawner(IPoolManager poolmanager, IWaveMessenger messenger,  List<Wave> waves, 
         int enemyBaseHealth, int enemyBaseDamage, int addBallCount, float applyDamageTime, float attackTime, float spawnOffset) 
     {
         _poolManager = poolmanager;
@@ -23,6 +25,11 @@ public class WaveSpawner : ISpawner
         _applyDamageTime = applyDamageTime;
         _attackTime = attackTime;
         _spawnOffset = spawnOffset;
+    }
+
+    public void SetHitUI(HitTextUI hitIU)
+    {
+        _hitUI = hitIU;
     }
 
     public GameObject Spawn()
@@ -41,6 +48,12 @@ public class WaveSpawner : ISpawner
         _messenger.SendMessage(enemies);
         return null;
     }
+    public GameObject Spawn(Vector3 position)
+    {
+        GameObject buffer = Spawn();
+        buffer.transform.position = position;
+        return buffer;
+    }
 
     public void InitEnemies(IBattle battle, Queue<Battling> enemies)
     {
@@ -48,7 +61,7 @@ public class WaveSpawner : ISpawner
         int damage = (int)(_enemyBaseDamage + _currentWave * 1.1f);
         foreach(RangeEnemy enemy in enemies)
         {
-            enemy.Init(battle, health, damage, _applyDamageTime, _attackTime);
+            enemy.Init(battle, _hitUI, health, damage, _applyDamageTime, _attackTime);
             enemy.SetBallCount(_addBallCount);
         }
     }
