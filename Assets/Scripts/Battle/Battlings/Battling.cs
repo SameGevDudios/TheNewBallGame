@@ -7,12 +7,12 @@ public abstract class Battling : MonoBehaviour
     [SerializeField] private Weapon _weapon;
     private HealthBarUI _healthBarUI;
     protected IBattle _battle;
-    private Battling _target;
+    protected Battling _target;
 
     protected int _maxHealth, _health, _damage;
     protected float _applyDamageTime, _attackTime;
 
-    public void Init(IBattle battle, int health, int damage, float applyDamageTime, float attackTime)
+    public virtual void Init(IBattle battle, int health, int damage, float applyDamageTime, float attackTime)
     {
         _battle = battle;
         _maxHealth = health;
@@ -25,11 +25,21 @@ public abstract class Battling : MonoBehaviour
 
     public virtual void Attack(Battling target)
     {
+        SetTarget(target);
+        BeginAttack();
+        Invoke("FinishAttack", _attackTime);
+    }
+
+    protected void SetTarget(Battling target)
+    {
         _target = target;
+    }
+
+    protected virtual void BeginAttack()
+    {
         _weapon.LookAtTarget(_target.transform);
         _weapon.Attack(_applyDamageTime);
         Invoke("ApplyDamage", _applyDamageTime);
-        Invoke("FinishAttack", _attackTime);
     }
 
     public void ApplyDamage()
@@ -47,15 +57,14 @@ public abstract class Battling : MonoBehaviour
         }
     }
 
+    protected virtual void Death()
+    {
+        gameObject.SetActive(false);
+    }
     public void Heal()
     {
         _health = _maxHealth;
         _healthBarUI.UpdateBar(_health, _maxHealth);
-    }
-
-    protected virtual void Death()
-    {
-        gameObject.SetActive(false);
     }
 
     private void FinishAttack()

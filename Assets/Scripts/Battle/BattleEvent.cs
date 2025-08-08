@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class BattleEvent : IBattle, IGameEvent
 {
-    private GameObject _gameOverPanel;
     private IEventCaller _eventCaller;
+
+    private GameObject _gameOverPanel;
     private Battling _player, _currentEntity;
     private Queue<Battling> _enemies;
     private bool _playerTurn, _canAttack = true;
 
-    public BattleEvent(GameObject gameOverPanel, IEventCaller eventCaller, Battling player)
+    public BattleEvent(IEventCaller eventCaller, GameObject gameOverPanel, Battling player)
     {
         _gameOverPanel = gameOverPanel;
         _eventCaller = eventCaller;

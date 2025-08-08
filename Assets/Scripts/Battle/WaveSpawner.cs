@@ -5,19 +5,21 @@ public class WaveSpawner : ISpawner
 {
     private IPoolManager _poolManager;
     private IWaveMessenger _messenger;
+
     private List<Wave> _waves = new();
-    private int _currentWave, _enemyBaseHeath, _enemyBaseDamage;
+    private int _currentWave, _enemyBaseHeath, _enemyBaseDamage, _addBallCount;
     private float _applyDamageTime, _attackTime;
     private float _currentOffset, _spawnOffset;
 
     public WaveSpawner(IPoolManager poolmanager, IWaveMessenger messenger, List<Wave> waves, 
-        int enemyBaseHealth, int enemyBaseDamage, float applyDamageTime, float attackTime, float spawnOffset) 
+        int enemyBaseHealth, int enemyBaseDamage, int addBallCount, float applyDamageTime, float attackTime, float spawnOffset) 
     {
         _poolManager = poolmanager;
         _messenger = messenger;
         _waves = waves;
         _enemyBaseHeath = enemyBaseHealth;
         _enemyBaseDamage = enemyBaseDamage;
+        _addBallCount = addBallCount;
         _applyDamageTime = applyDamageTime;
         _attackTime = attackTime;
         _spawnOffset = spawnOffset;
@@ -44,9 +46,10 @@ public class WaveSpawner : ISpawner
     {
         int health = (int)(_enemyBaseHeath + _currentWave * 1.1f);
         int damage = (int)(_enemyBaseDamage + _currentWave * 1.1f);
-        foreach(Battling enemy in enemies)
+        foreach(RangeEnemy enemy in enemies)
         {
             enemy.Init(battle, health, damage, _applyDamageTime, _attackTime);
+            enemy.SetBallCount(_addBallCount);
         }
     }
 }

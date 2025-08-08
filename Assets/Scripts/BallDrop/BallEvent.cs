@@ -7,6 +7,9 @@ public class BallEvent : MonoBehaviour, IGameEvent
     private IEventCaller _eventCaller;
     private IGameEvent _mazeEvent;
     private IBalance _balance;
+
+    private BallCountUI _ui;
+
     private Vector3 _touchPosition;
     private float _spawnDelay, _spawnPositionY;
     private bool _canSpawn;
@@ -22,21 +25,31 @@ public class BallEvent : MonoBehaviour, IGameEvent
     #endregion
 
     public void Init(ISpawner ballSpawner, IEventCaller eventCaller, IGameEvent mazeEvent, 
-        IBalance balance, float spawnDelay, float spawnPositionY)
+        IBalance balance, BallCountUI ballUI, float spawnDelay, float spawnPositionY)
     {
         _ballSpawner = ballSpawner;
         _eventCaller = eventCaller;
         _mazeEvent = mazeEvent;
         _balance = balance;
+        
+        _ui = ballUI;
+
         _spawnDelay = spawnDelay;
         _spawnPositionY = spawnPositionY;
+
+        UpdateUI();
     }
 
     public void Play()
     {
         ResetCooldown();
-        _startBallCount = 4;
         _ballCount = _startBallCount;
+    }
+
+    public void AddBallCount(int amout)
+    {
+        _startBallCount += amout;
+        UpdateUI();
     }
 
     private void Update()
@@ -54,6 +67,7 @@ public class BallEvent : MonoBehaviour, IGameEvent
                 {
                     _canSpawn = false;
                     _startBallCount--;
+                    UpdateUI();
                     UpdateTouchPosition();
                     SpawnBall();
                     Invoke("ResetCooldown", _spawnDelay);
@@ -62,6 +76,11 @@ public class BallEvent : MonoBehaviour, IGameEvent
         }
     }
     
+    private void UpdateUI()
+    {
+        _ui.UpdateText(_startBallCount);
+    }
+
     private void UpdateTouchPosition()
     {
         _touchPosition = new Vector3(

@@ -13,6 +13,7 @@ public class Bootstrap : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private TMP_Text _moneyText;
+    [SerializeField] private TMP_Text _ballText;
 
     [Header("Player")]
     [SerializeField] private string _playerPoolTag;
@@ -22,6 +23,7 @@ public class Bootstrap : MonoBehaviour
     [Header("Enemies")]
     [SerializeField] private int _enemyHealth;
     [SerializeField] private int _enemyDamage;
+    [SerializeField] private int _addBallCount;
 
     [Header("Battle speed")]
     [SerializeField, Min(0.01f)] private float _applyDamageSpeed;
@@ -68,7 +70,7 @@ public class Bootstrap : MonoBehaviour
 
         // Instantiate spawners
         ISpawner waveSpawner = 
-            new WaveSpawner(poolManager, messenger, _waves, _enemyHealth, _enemyDamage, _applyDamageSpeed, _attackSpeed, _playerMoveDistance);
+            new WaveSpawner(poolManager, messenger, _waves, _enemyHealth, _enemyDamage, _addBallCount, _applyDamageSpeed, _attackSpeed, _playerMoveDistance);
         ISpawner backgroundSpawner = new BackgroundSpawner(poolManager, _playerMoveDistance);
         ISpawner mazeSpawner = new MazeSpawner(poolManager, camera.transform, _mazeMoveDistance, _mazePrefabCount);
         ISpawner ballSpawner = new BallSpawner(poolManager, _ballPoolTag);
@@ -82,10 +84,11 @@ public class Bootstrap : MonoBehaviour
         IMover mazeMover = new VerticalMover(null, _mazeMoveDistance, _mazeEventMoveDuration);
 
         // Instantiate battle
-        IBattle battle = new BattleEvent(_gameOverPanel, eventCaller, player);
+        IBattle battle = new BattleEvent( eventCaller, _gameOverPanel, player);
 
         // Instantiate UI
         MoneyUI moneyUI = new MoneyUI(_moneyText);
+        BallCountUI ballUI = new BallCountUI(_ballText);
 
         // Instantiate money storage
         IBalance moneyBalance = new MoneyStorage(moneyUI);
@@ -103,7 +106,7 @@ public class Bootstrap : MonoBehaviour
         IGameEvent battleEvent = (IGameEvent)battle;
         IGameEvent mazeEvent = new MazeEvent(mazeSpawner, cameraMover, mazeMover, eventCaller);
         BallEvent ballEvent = poolManager.InstantiateFromPool(_ballEventPoolTag, Vector3.zero, Quaternion.identity).GetComponent<BallEvent>();
-        ballEvent.Init(ballSpawner, eventCaller, mazeEvent, moneyBalance, _ballSpawnDelay, _ballSpawnPositionY);
+        ballEvent.Init(ballSpawner, eventCaller, mazeEvent, moneyBalance, ballUI, _ballSpawnDelay, _ballSpawnPositionY);
 
         // Add events to queue
         eventCaller.Add(changer);
