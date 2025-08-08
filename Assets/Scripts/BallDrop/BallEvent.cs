@@ -105,11 +105,16 @@ public class BallEvent : MonoBehaviour, IGameEvent
         _ballCount++;
     }
 
-    public void RemoveBall()
+    public void BallCaught()
+    {
+        _balance.Add();
+        BallGone();
+    }
+
+    public void BallGone()
     {
         _ballCount--;
-        _balance.Add();
-        if(_ballCount == 0)
+        if (_ballCount == 0)
         {
             _canSpawn = false;
             _mazeEvent.Play();

@@ -33,7 +33,11 @@ public class Ball : MonoBehaviour, IBall
                 CloneAtDoor(collision);
                 break;
             case "Basket":
-                BallEvent.Instance.RemoveBall();
+                BallEvent.Instance.BallCaught();
+                gameObject.SetActive(false);
+                break;
+            case "KillZone":
+                BallEvent.Instance.BallGone();
                 gameObject.SetActive(false);
                 break;
         }
