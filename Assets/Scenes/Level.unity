@@ -783,8 +783,8 @@ MonoBehaviour:
   _playerDamage: 20
   _enemyHealth: 40
   _enemyDamage: 10
-  _applyDamageSpeed: 2
-  _attackSpeed: 4
+  _applyDamageSpeed: 0.5
+  _attackSpeed: 2
   _damageAmount: 10
   _healthAmount: 15
   _speedAmount: 0.9
