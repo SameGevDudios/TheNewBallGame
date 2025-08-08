@@ -57,9 +57,10 @@ public class WaveSpawner : ISpawner
 
     public void InitEnemies(IBattle battle, Queue<Battling> enemies)
     {
-        int health = (int)(_enemyBaseHeath + _currentWave * 1.1f);
-        int damage = (int)(_enemyBaseDamage + _currentWave * 1.1f);
-        foreach(RangeEnemy enemy in enemies)
+        float difficulty = 1.2f;
+        int health = (int)(_enemyBaseHeath + _currentWave * difficulty);
+        int damage = (int)(_enemyBaseDamage + _currentWave * difficulty);
+        foreach (RangeEnemy enemy in enemies)
         {
             enemy.Init(battle, _hitUI, health, damage, _applyDamageTime, _attackTime);
             enemy.SetBallCount(_addBallCount);
