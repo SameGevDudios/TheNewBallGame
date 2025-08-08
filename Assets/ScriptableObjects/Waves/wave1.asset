@@ -15,5 +15,5 @@ MonoBehaviour:
   Enemies:
   - EnemyObject: {fileID: 1118466629101203988, guid: 8541e5e250807d34391c09efce851e92, type: 3}
     Position: {x: 0, y: 0.74, z: 0}
-  - EnemyObject: {fileID: 1118466629101203988, guid: 8541e5e250807d34391c09efce851e92, type: 3}
+  - EnemyObject: {fileID: 1118466629101203988, guid: fc946d417f41cee4284f64c03149bfe3, type: 3}
     Position: {x: 2, y: 0.74, z: 0}
