@@ -1,44 +1,25 @@
-using System.Collections;
 using UnityEngine;
 
 public class Sword : Weapon
 {
-    [SerializeField] private AnimationCurve _verticalVelocity, _horizontalVelocity;
-    private float _attackDuration;
+    [SerializeField] private Animator _animator;
 
     public override void Attack(float attackDuration)
     {
-        _attackDuration = attackDuration;
-        StartCoroutine(MovingVertically());
-        StartCoroutine(MovingHorizontally());
+        _animator.SetTrigger("Attack");
+        AnimationClip currentClip =
+            _animator.GetCurrentAnimatorClipInfo(0)[0].clip;
+        _animator.speed = currentClip.length / attackDuration;
+        Invoke("EndAttackAnimation", attackDuration);
+    }
+
+    private void EndAttackAnimation()
+    {
+        _animator.speed = 1f;
     }
 
     public override void LookAtTarget(Transform target)
     {
 
-    }
-
-    private IEnumerator MovingVertically()
-    {
-        float currentTime = 0;
-        float totalTime = _verticalVelocity.keys[_verticalVelocity.keys.Length - 1].time;
-        while (currentTime < totalTime)
-        {
-            transform.position = transform.position + Vector3.up * _verticalVelocity.Evaluate(currentTime) * _attackDuration;
-            currentTime += Time.deltaTime / _attackDuration;
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
-    private IEnumerator MovingHorizontally()
-    {
-        float currentTime = 0;
-        float totalTime = _verticalVelocity.keys[_verticalVelocity.keys.Length - 1].time;
-        while (currentTime < totalTime)
-        {
-            transform.position = transform.position + Vector3.right * _verticalVelocity.Evaluate(currentTime) * _attackDuration;
-            currentTime += Time.deltaTime / _attackDuration;
-            yield return new WaitForEndOfFrame();
-        }
     }
 }
